@@ -1,0 +1,87 @@
+﻿@using System.Reflection
+@using Capstone.Web.Models
+@model Capstone.Web.Models.ParkDetails
+
+<body>
+<div class="row">
+    <img src="~/Content/img/parks/@(Model.Park.ParkCode).jpg" style="display: block; margin-left: auto; margin-right: auto; width: 60%;" alt="" />
+    <div class=" column">
+        <p><h2>@Model.Park.ParkName<span style="font-size:medium; font-weight:bold; font-style:italic"> Founded in @Model.Park.YearFounded</span></h2></p>
+        <p><h4 style="font-style:italic; text-align:center">"@Model.Park.InspirationalQuote" -@Model.Park.InspirationalQuoteSource</h4></p>
+    </div>
+    <div class="column">
+        <ul font-weight:bold">
+            <li>ParkCode : @Model.Park.ParkCode</li>
+            <li>State : @Model.Park.State</li>
+            <li>Entrance fee: @Model.Park.EntryFee.ToString("c")</li>
+            <li>Acerage : @Model.Park.Acreage.ToString("n0")</li>
+            <li>Elevation(ft.) : @Model.Park.ElevationInFeet.ToString("n0")</li>
+            <li>Miles of trail : @Model.Park.MilesOfTrail.ToString("n0")</li>
+            <li>Number of Campsites : @Model.Park.NumberOfCampsites</li>
+            <li>Number of Species present: @Model.Park.NumberOfAnimalSpecies.ToString("n0")</li>
+            <li>Annual Visitors: @Model.Park.AnnualVisitorCount.ToString("n0")</li>
+        </ul>
+    </div>
+
+</div>
+<br />
+<p style="text-align:center"><h4>@Model.Park.ParkDescription</h4></p>
+<br />
+
+
+<div class="row">
+    @foreach (Weather weather in Model.Weather)
+    {
+        <div class="column">
+            <p>Day:    @weather.FiveDayForecastValue</p>
+            <p><img src="~/Content/img/weather/@(weather.Forecast).png" style="width:65px; height:auto"></p>
+            <p>High:   @weather.High°@weather.Unit </p>
+            <p>Low:    @weather.Low°@weather.Unit </p>
+            @{
+                switch (weather.Forecast)
+                {
+                    case ("rain"):
+                        <p>Pack rain gear and wear waterproof shoes!</p>;
+                        break;
+                    case ("snow"):
+                        <p>Pack some snowshoes!</p>;
+                        break;
+                    case ("thunderstorms"):
+                        <p>Seek shelter and avoid hiking on exposed ridges!</p>;
+                        break;
+                    case ("sunny"):
+                        <p>Make sure to pack and wear some sunblock!</p>;
+                        break;
+                    default:
+                        <p>Have fun!</p>;
+                        break;
+                }
+
+
+                if ((weather.High >= 75 && weather.Farhrenheit == true) || (weather.High >= 24 && weather.Celcius == true))
+                {
+                    <p>Bring an extra gallon of water!</p>
+                }
+                else if ((weather.Low <= 20 && weather.Farhrenheit == true) || weather.Low <= -6 && weather.Celcius == true)
+                {
+                    <p>Hypothermia is dangerous, be sure to dress warm</p>
+                }
+                else if ((weather.High - weather.Low) >= 20)
+                {
+                    <p>Wear breathable layers</p>
+                }
+            }
+        </div>
+
+    }
+</div>
+@using (Html.BeginForm("ChangeTemperatureUnit", "Park"))
+{
+    @Html.Hidden("parkCode", Model.Park.ParkCode)
+    <button>Convert Temperature Unit</button>
+}
+</body>
+
+
+
+

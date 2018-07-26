@@ -1,0 +1,53 @@
+﻿@using Exercises.Models
+@model Product
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div style="line-height: 1;">
+        <img style="float: left;" src="~/Content/images/@Model.ImageName" />
+        <p style="display: inline; margin: 0; padding: 0;"><b>@Model.Name
+        @if (Model.IsTopSeller)
+        {
+             <font style="font-size: 12px;"id="top-seller">BEST SELLER!</font>
+        }
+        </b>
+        </p>
+
+        <p style="margin: 0; padding: 0;">By @Model.Manufacturer</p>
+
+        @switch (Convert.ToInt32(Model.AverageRating))
+        {
+            case 1:
+            <img id="star-image" src="~/Content/images/1-star.png" />
+            break;
+
+            case 2:
+            <img id="star-image" src="~/Content/images/2-star.png" />
+            break;
+
+            case 3:
+            <img id="star-image" src="~/Content/images/3-star.png" />
+            break;
+
+            case 4:
+            <img id="star-image" src="~/Content/images/4-star.png" />
+            break;
+
+            case 5:
+            <img id="star-image" src="~/Content/images/5-star.png" />
+            break;
+        }
+
+        <p id="product-price">Price: $@Model.Price</p>
+
+        <p  style="margin: 0; padding: 0;"><b></b>Weight:</b> @Model.WeightIbLbs lbs</p>
+        <p><b>Description:</b> @Model.Description</p>
+    </div>
+</body>
+</html>

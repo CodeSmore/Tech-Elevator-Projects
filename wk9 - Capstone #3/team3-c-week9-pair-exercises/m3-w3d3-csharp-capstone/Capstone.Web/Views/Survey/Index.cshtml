@@ -1,0 +1,56 @@
+﻿@using Capstone.Web.Models;
+@using Capstone.Web.DAL;
+@model Capstone.Web.Models.SurveyEntry
+
+
+<h2>Survey</h2>
+
+@{
+    List<SelectListItem> parkNameList = new List<SelectListItem>();
+    List<Park> tempList = new List<Park>();
+
+    for (int i = 0; i < Model.ParkList.Count; i++)
+    {
+        parkNameList.Add(new SelectListItem { Text = Model.ParkList[i].ParkName, Value = Model.ParkList[i].ParkCode });
+    }
+
+}
+
+@using (Html.BeginForm("SubmitSurvey", "Survey", FormMethod.Post))
+{<div class="row">
+        <div class="formInputGroup; column">
+            @Html.Label("ParkCode", "*Park")
+            @Html.DropDownListFor(m => m.ParkCode, parkNameList)
+        </div>
+
+        <div class="formInputGroup; column">
+            @Html.Label("EmailAddress", "*Email Address: ")
+            @Html.TextBoxFor(m => m.EmailAddress)
+        </div>
+        <div class="formInputGroup; column">
+            @Html.Label("State", "*State")
+            @Html.TextBoxFor(m => m.State)
+        </div>
+    </div>
+    <div class="formInputGroup">
+        <div style="padding-left: 15%"> @Html.Label("Activity Level", "*Activity Level")</div> <br />
+        <div class=" row">
+            <div class="column">
+                <input type="radio" name="activityLevel" value="inactive;"> Inactive
+            </div>
+            <div class="column">
+                <input type="radio" name="activityLevel" value="sedentary"> Sedentary
+            </div>
+            <div class="column">
+                <input type="radio" name="activityLevel" value="active"> Active
+            </div>
+            <div class="column"> <input type="radio" name="activityLevel" value="extremelyActive"> Extremely Active</div>
+        </div>
+
+        * = required field
+    </div>
+
+    <button class="formSubmitButton" type="submit">SUBMIT!</button>
+
+}
+

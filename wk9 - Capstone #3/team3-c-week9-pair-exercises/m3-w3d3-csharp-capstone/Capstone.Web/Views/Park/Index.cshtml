@@ -1,0 +1,30 @@
+﻿@using Capstone.Web.Models
+@model IEnumerable<Capstone.Web.Models.Park>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @foreach (var item in Model)
+    {
+
+        <div class="row">
+            <div class="column">
+                <a href='@Url.Action("Details", "Park", new { id = item.ParkCode }, null)'>
+                    <img src="~/Content/img/parks/@(item.ParkCode).jpg" alt="" />
+                </a>
+            </div>
+            <div class="column">
+                <h3>@Html.DisplayFor(modelItem => item.ParkName) - @Html.DisplayFor(modelItem => item.State)</h3>
+                <p>@Html.DisplayFor(modelItem => item.ParkDescription)</p>
+                <p>@Html.ActionLink("More Info", "Details", "Park", new { id = item.ParkCode }, null) </p>
+            </div>
+        </div>
+    }
+</body>
+</html>

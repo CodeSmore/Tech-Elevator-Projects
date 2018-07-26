@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Exercises.Models;
+
+@model List<Product>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Toy Department</title>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Toy Department</title>
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+
+<section>
+    <h1>Toy Department</h1>
+    @foreach (Product product in Model)
+    {
+    <div style="display: inline-block; margin-left:5%">
+
+        <a href=@Url.Action("Detail", "Product", new { id = product.ProductId})>
+            <img style=" width: 200px; height: 150px;" src="~/Content/images/@product.ImageName" />
+        </a>
+        <p style="margin-left: 16%"><b>@Html.ActionLink(product.Name, "Detail", "Product", new { id = product.ProductId }, null)</b></p>
+
+        @if (product.IsTopSeller)
+        {
+            <p id="top-seller" style="margin-left: 16%"><font style="font-size: 15px">BEST SELLER!</font></p>
+        }
+
+        <p style="margin-left: 16%">$@product.Price</p>
+        <p style="margin-left: 16%">Weight: @product.WeightIbLbs lbs</p>
+
+        @switch (Convert.ToInt32(product.AverageRating))
+        {
+            case 1:
+                <td><img id="star-image-table" style="margin-left: 16%;" src="~/Content/images/1-star.png" /></td>
+                break;
+
+            case 2:
+                <td><img id="star-image-table" style="margin-left: 16%;" src="~/Content/images/2-star.png" /></td>
+                break;
+
+            case 3:
+                <td><img id="star-image-table" style="margin-left: 16%;" src="~/Content/images/3-star.png" /></td>
+                break;
+
+            case 4:
+                <td><img id="star-image-table" style="margin-left: 16%;" src="~/Content/images/4-star.png" /></td>
+                break;
+
+            case 5:
+                <td><img id="star-image-table" style="margin-left: 16%;" src="~/Content/images/5-star.png" /></td>
+                break;
+
+        }
+    </div>
+    }
+</section>
+</html>

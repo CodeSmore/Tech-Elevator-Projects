@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@using Exercises.Models;
+
+@model List<Product>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+<body>
+    <section>
+        <h1>
+            Toy Department
+        </h1>
+        <p id="item-info-list">
+            @{
+                foreach (Product product in Model)
+                {
+                    <a href=@Url.Action("Detail", "Product", new { id = product.ProductId})>
+                        <img class="image-list" src="~/Content/images/@product.ImageName" />
+                    </a>
+                    <p1><b>@Html.ActionLink(product.Name, "Detail", "Product", new { id = product.ProductId }, null)</b></p1>
+                    if (product.IsTopSeller)
+                    {
+                        <p1 id="product-name">BEST SELLER!</p1>
+                    }
+                    <br />
+                    <p1>by @product.Manufacturer</p1>
+                    <br />
+                    <p1 id="product-price">$@product.Price</p1>
+                    <br />
+                    <p1><b>Weight</b> @product.WeightIbLbs lbs</p1>
+                    <br />
+                    if (product.RemainingStock <= 3)
+                    {
+                        <p1 id="stock"><b>Only @product.RemainingStock left!</b></p1>
+                        <br />
+                    }
+                    switch (Convert.ToInt32(product.AverageRating))
+                    {
+                        case 1:
+                            <img id="star-image" src="~/Content/images/1-star.png" />
+                            break;
+
+                        case 2:
+                            <img id="star-image" src="~/Content/images/2-star.png" />
+                            break;
+
+                        case 3:
+                            <img id="star-image" src="~/Content/images/3-star.png" />
+                            break;
+
+                        case 4:
+                            <img id="star-image" src="~/Content/images/4-star.png" />
+                            break;
+
+                        case 5:
+                            <img id="star-image" src="~/Content/images/5-star.png" />
+                            break;
+                    }
+                    <br />
+                    <br />
+                    <br />
+
+                    <hr />
+
+                }
+            }
+
+        </p>
+    </section>
+</body>
+</html>

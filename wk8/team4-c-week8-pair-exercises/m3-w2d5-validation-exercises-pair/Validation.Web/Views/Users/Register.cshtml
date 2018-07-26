@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+@using Validation.Web.Models
+@model RegistrationViewModel
+
+<h2>Register</h2>
+
+
+@using (Html.BeginForm("Register", "Users", FormMethod.Post))
+{
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Email)
+        @Html.EditorFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.ConfirmEmail)
+        @Html.EditorFor(m => m.ConfirmEmail)
+        @Html.ValidationMessageFor(m => m.ConfirmEmail)
+    </div>
+
+
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword)
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Birthday)
+        @Html.EditorFor(m => m.Birthday)
+        @Html.ValidationMessageFor(m => m.Birthday)
+    </div>
+    
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.Tickets)
+        @Html.EditorFor(m => m.Tickets)
+        @Html.ValidationMessageFor(m => m.Tickets)
+    </div>
+    
+    <button class="formSubmitButton">Register</button>
+}

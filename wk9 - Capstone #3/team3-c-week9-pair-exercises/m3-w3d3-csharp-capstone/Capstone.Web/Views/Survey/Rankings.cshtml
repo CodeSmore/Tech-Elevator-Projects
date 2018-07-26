@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Capstone.Web.Models.SurveyResult>
+@using Capstone.Web.Models
+
+@{
+    ViewBag.Title = "Rankings";
+}
+
+<h2>Rankings</h2>
+
+<div class="row">
+    <div class="column"></div>
+    <div class="column" style="font-weight:bold; font-size:larger">@Html.Label("ParkName", "Park Name") </div>
+    <div class="column" style="font-weight:bold; font-size:larger">@Html.Label("Count", "Votes")</div>
+</div>
+
+@foreach (SurveyResult result in Model)
+{
+    <div class="row">
+        <div class="column"><img src="~/Content/img/parks/@(result.ParkCode).jpg" style="width:300px; height:auto" /></div>
+        <div class="column" style="padding-top: 8%; font-size:large">@result.ParkName </div>
+        <div class="column" style="padding-top: 8%; font-size:large">@result.Count</div>
+    </div>
+}
+

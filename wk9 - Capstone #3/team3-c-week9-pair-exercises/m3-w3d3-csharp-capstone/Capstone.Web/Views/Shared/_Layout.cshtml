@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NPGeek - @ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/stylesheet.css" />
+</head>
+<body>
+    <header>
+      <img src="~/Content/img/logo.png" style="display: block; margin-left: auto; margin-right: auto; width: 40%;"/>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="@Url.Action("Index", "Park")">Home</a></li>
+            <li>@Html.ActionLink("Survey", "Index", "Survey")</li>
+            <li>@Html.ActionLink("Ranking", "Rankings", "Survey")</li>
+        </ul>
+    </nav>
+
+    <section id="main">
+
+        @RenderBody()
+
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>

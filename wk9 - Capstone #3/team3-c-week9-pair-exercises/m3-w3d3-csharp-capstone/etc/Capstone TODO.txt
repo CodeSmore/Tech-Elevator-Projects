@@ -1,0 +1,15 @@
++- add weather images for 5day forcast
++- add weather messages based on forcast
++- survey input
++- Rankings View
+- Add temp unit change in Details
+	- John says to make it a session is best
+
+
+
+
+-CSS for
+	-Index
+	-Survey	
+	-Details
+	-Rankings

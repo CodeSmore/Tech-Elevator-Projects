@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Exercises.Models;
+
+@model List<Product>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <sectiontable>
+        <h1>
+            Toy Department
+        </h1>
+
+
+
+        <p id="item-info-table">
+            <table>
+                <td></td>
+                @{ foreach (Product product in Model)
+                    {
+                        <th>
+                            <a href=@Url.Action("Detail", "Product", new { id = product.ProductId})>
+                                <img class="image-list" src="~/Content/images/@product.ImageName" />
+                            </a>
+                        @{ if (product.IsTopSeller)
+                            {
+                                <p id="top-seller">BEST SELLER!</p>
+                            }
+
+                        }
+
+                        </th>
+
+                    }
+                }
+
+                <tr id="table-grey-row">
+                    <td>
+                        Name
+                    </td>
+                    @foreach (Product product in Model)
+                    {
+                    <td>
+                        <b>@Html.ActionLink(product.Name, "Detail", "Product", new { id = product.ProductId }, null)</b>
+                    </td>
+        }
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td>
+                            Rating
+                        </td>
+                        @foreach (Product product in Model)
+                        {
+                            switch (Convert.ToInt32(product.AverageRating))
+                            {
+                                case 1:
+                                    <td><img id="star-image-table" style="padding-left: 50px" src="~/Content/images/1-star.png" /></td>
+                                    break;
+
+                                case 2:
+                                    <td><img id="star-image-table" style="padding-left: 45px" src="~/Content/images/2-star.png" /></td>
+                                    break;
+
+                                case 3:
+                                    <td><img id="star-image-table" style="padding-left: 50px" src="~/Content/images/3-star.png" /></td>
+                                    break;
+
+                                case 4:
+                                    <td><img id="star-image-table" style="padding-left: 55px" src="~/Content/images/4-star.png" /></td>
+                                    break;
+
+                                case 5:
+                                    <td><img id="star-image-table" style="padding-left: 60px;" src="~/Content/images/5-star.png" /></td>
+                                    break;
+
+                            }
+                        }
+                    </tr>
+                    <tr id="table-grey-row">
+                        <td>
+                            Mfr
+                        </td>
+                        @{ foreach (Product product in Model)
+                            {
+                                <td>
+                                    <p>
+                                        @product.Manufacturer
+                                    </p>
+                                </td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <td>
+                            Price
+                        </td>
+
+                        @{ foreach (Product product in Model)
+                            {
+                                <td>
+                                    <p id="product-price">
+                                        $@product.Price
+                                    </p>
+                                </td>
+                            }
+
+                        }
+                    </tr>
+                    <tr id="table-grey-row">
+                        <td>
+                            wt. (in lbs)
+                        </td>
+                        @{ foreach (Product product in Model)
+                            {
+                                <td>
+                                    <p>
+                                        @product.WeightIbLbs
+                                    </p>
+                                </td>
+                            }
+
+                        }
+                    </tr>
+                    </table>
+                    </p>
+                </sectiontable>
+            </body>
+        </html>
